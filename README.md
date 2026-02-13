@@ -9,7 +9,7 @@ A hands-on, project-based journey to deeply understand and master PostgreSQL usi
 - PostgreSQL 17+
 - psycopg2 (focus on raw SQL)
 
-### Day 1: Setup & First Connection
+## Day 1: Setup & First Connection
 Features
 
 * PostgreSQL installation verification
@@ -31,7 +31,7 @@ Key Notes
 - Close cursor & connection properly using `finally` block
 - `psycopg2.Error` is the preferred way to catch database-specific exceptions
 
-### Day 2: Schema Design & Constraints
+## Day 2: Schema Design & Constraints
 Features
 
 * Understanding PostgreSQL data types (`text`, `varchar`, `timestamptz`, `bigserial`, ...)
@@ -54,3 +54,30 @@ Key Notes
 - Foreign keys do **NOT** get automatic indexes → consider adding them manually later
 - `bigserial` is safer than `serial` for future scalability
 - `CHECK` constraints are excellent for catching invalid data early
+
+
+### Day 3: Basic CRUD Operations + Safe Query Writing
+
+Features
+
+* Safe parameterized queries (protection against SQL injection)
+* INSERT ... RETURNING pattern
+* SELECT with JOIN + column alias
+* UPDATE with condition
+* DELETE with RETURNING
+* Transaction management (commit / rollback)
+* Helper functions for each CRUD operation
+
+Progress
+- Created reusable CRUD functions for authors and books
+- Implemented safe parameterized queries everywhere
+- Used RETURNING clause to get inserted/updated/deleted IDs
+- Added JOIN to show author name with books
+- Handled errors with try/except + rollback
+
+Key Notes
+- NEVER concatenate strings into SQL queries → always use parameters (%s, (value,))
+- Use RETURNING to get generated IDs immediately after INSERT
+- Manage transactions explicitly: commit on success, rollback on error
+- Dictionary result from SELECT is more readable than tuples
+- created_at can be updated automatically with trigger (we'll do it later)
